@@ -61,7 +61,7 @@ rf = RandomForestClassifier(max_depth=8, max_features=5, min_samples_split=5, n_
 rf.fit(X_train, y_train)
 y_pred_rf = rf.predict(X_test)
 print("Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
-dump(rf, 'models/random_forest_model2.joblib')
+dump(rf, 'models/random_forest_model.joblib')
 
 scaler = StandardScaler().fit(X_train)
 X_train_scaled = scaler.transform(X_train)
@@ -70,10 +70,23 @@ gnb = GaussianNB()
 gnb.fit(X_train_scaled, y_train)
 y_pred_gnb = gnb.predict(X_test_scaled)
 print("Gaussian Naive Bayes Accuracy:", accuracy_score(y_test, y_pred_gnb))
-dump(gnb, 'models/gaussian_naive_bayes_model2.joblib')
+dump(gnb, 'models/gaussian_naive_bayes_model.joblib')
 
 svm = SVC(kernel='linear')
 svm.fit(X_train, y_train)
 y_pred_svm = svm.predict(X_test)
-print("SVM Accuracy:", accuracy_score(y_test, y_pred_svm))
+print("SVM Linear Accuracy:", accuracy_score(y_test, y_pred_svm))
+dump(svm, 'models/svm_model_linear.joblib')  # Save the model
+
+svm = SVC(kernel='poly')
+svm.fit(X_train, y_train)
+y_pred_svm = svm.predict(X_test)
+print("SVM Poly Accuracy:", accuracy_score(y_test, y_pred_svm))
 dump(svm, 'models/svm_model_poly.joblib')  # Save the model
+
+svm = SVC(kernel='sigmoid')
+svm.fit(X_train, y_train)
+y_pred_svm = svm.predict(X_test)
+print("SVM Accuracy Sigmoid:", accuracy_score(y_test, y_pred_svm))
+dump(svm, 'models/svm_model_sigmoid.joblib')  # Save the model
+
