@@ -57,7 +57,7 @@ y_encoded = encoder.fit_transform(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.05, random_state=31)
 
-rf = RandomForestClassifier(max_depth=80, max_features=5, min_samples_split=5, n_estimators=500)
+rf = RandomForestClassifier(max_depth=8, max_features=5, min_samples_split=5, n_estimators=500)
 rf.fit(X_train, y_train)
 y_pred_rf = rf.predict(X_test)
 print("Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
@@ -72,7 +72,7 @@ y_pred_gnb = gnb.predict(X_test_scaled)
 print("Gaussian Naive Bayes Accuracy:", accuracy_score(y_test, y_pred_gnb))
 dump(gnb, 'models/gaussian_naive_bayes_model2.joblib')
 
-svm = SVC(kernel='poly')
+svm = SVC(kernel='linear')
 svm.fit(X_train, y_train)
 y_pred_svm = svm.predict(X_test)
 print("SVM Accuracy:", accuracy_score(y_test, y_pred_svm))
